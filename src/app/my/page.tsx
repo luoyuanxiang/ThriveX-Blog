@@ -6,8 +6,6 @@ import Character from './component/Character'
 import Map from './component/Map'
 import Technology from './component/Technology'
 import Project from './component/Project'
-import CurriculumVitae from './component/CurriculumVitae'
-import Info from "./component/Info";
 import Calendar from "./component/Calendar"
 import InfoTwo from './component/InfoTwo'
 

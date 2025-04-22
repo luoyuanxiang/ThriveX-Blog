@@ -34,7 +34,7 @@ export async function GET() {
         copyright: 'ThriveX 现代化博客管理系统',
         updated: new Date(),
         generator: '为爱发电',
-        docs: "https://github.com/LiuYuYang01/ThriveX-Blog",
+        docs: "https://github.com/luoyuanxiang/ThriveX-Blog",
         author: {
             name: user.name,
             email: user.email,
