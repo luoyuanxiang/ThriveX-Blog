@@ -5,8 +5,8 @@ import TagItemCard from "./components/TagItemCard"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "标签页",
-  description: "标签页",
+  title: "标签墙",
+  description: "标签墙",
 };
 
 export default async () => {
@@ -14,7 +14,7 @@ export default async () => {
 
   return (
     <div className="py-[50px] mt-[60px] h-screen overflow-scroll hide_sliding">
-      <h1 className="relative z-20 text-4xl font-bold text-center">标签页</h1>
+      <h1 className="relative z-20 text-4xl font-bold text-center">标签墙</h1>
 
       <div className="relative z-20 flex flex-wrap justify-center w-11/12 mx-auto py-10 px-0 sm:px-10">
         {data.map((tag, index) => (
