@@ -7,15 +7,13 @@ export default async <T>(method: string, api: string, data?: any, caching = true
     try {
         const res = await fetch(`${url}${api}`, {
             method,
-            credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
             [method === "POST" ? "body" : ""]: JSON.stringify(data ? data : {}),
             next: { revalidate: caching ? cachingTime : 0 }
         })
-
-        return res?.json() as Promise<ResponseData<T>>;
+        return await res?.json() as Promise<ResponseData<T>>;
     } catch (error) {
         console.log("捕获到异常：", error);
     }
