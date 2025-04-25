@@ -10,7 +10,8 @@ export interface Config {
     status: Status,
     isEncrypt: number,
     isDel: number,
-    password: string
+    password: string,
+    comment: boolean
 }
 
 export interface Article {

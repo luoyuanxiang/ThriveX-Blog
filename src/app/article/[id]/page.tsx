@@ -19,6 +19,8 @@ import dayjs from 'dayjs';
 import { Article } from '@/types/app/article';
 import Encrypt from '@/components/Encrypt';
 import NotFound from '@/app/not-found';
+import {Web} from "@/types/app/web";
+import {getConfigDataAPI} from "@/api/project";
 
 interface Props {
     params: Promise<{ id: number }>;
@@ -30,6 +32,7 @@ export default async (props: Props) => {
     const params = await props.params;
     const id = params.id
     const password = searchParams.password
+    const web =  (await getConfigDataAPI<Web>("web"));
 
     const { code, data } = password ? (await getArticleDataAPI(id, password)) || { data: {} as Article } : (await getArticleDataAPI(id)) || { data: {} as Article }
 
@@ -91,7 +94,9 @@ export default async (props: Props) => {
 
                             <Copyright />
                             <UpAndDown id={id} prev={data?.prev} next={data?.next} />
-                            <Comment articleId={id} articleTitle={data.title} />
+                            {
+                                web?.data.globalComment === 'true' && data?.config.comment && <Comment articleId={id} articleTitle={data.title} />
+                            }
                         </div>
                     </div>
 

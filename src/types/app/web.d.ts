@@ -17,5 +17,6 @@ export interface Web {
   typeId: number,
   type: WebType,
   auditStatus: number,
-  createTime?: string
+  createTime?: string,
+  globalComment: string;
 }
