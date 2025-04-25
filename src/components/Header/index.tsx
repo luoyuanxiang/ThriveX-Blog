@@ -18,6 +18,7 @@ import { getConfigDataAPI } from '@/api/project';
 
 import { useConfigStore } from '@/stores';
 import { Theme, Web } from '@/types/app/project';
+import defaultUserAvatar from '@/assets/image/avatar.png'
 
 const Header = () => {
     // 是否暗黑模式
@@ -90,8 +91,8 @@ const Header = () => {
                     <Link href="/" className="flex items-center p-5 text-[15px] transition-colors">
                         {
                             isDark
-                                ? <img src={theme?.dark_logo} width={55} height={55} alt="Logo" className='rounded-full avatar-animation shadow-[5px_11px_30px_20px_rgba(255,255,255,0.3)]' />
-                                : <img src={isPathSty || isScrolled ? theme?.light_logo : theme?.dark_logo} width={55} height={55} alt="Logo" className='rounded-full avatar-animation shadow-[5px_11px_30px_20px_rgba(255,255,255,0.3)]' />
+                                ? <img src={theme?.dark_logo ? theme?.dark_logo : defaultUserAvatar.src} width={55} height={55} alt="Logo" className='rounded-full avatar-animation shadow-[5px_11px_30px_20px_rgba(255,255,255,0.3)]' />
+                                : <img src={isPathSty || isScrolled ? (theme?.light_logo ? theme?.light_logo : defaultUserAvatar.src) : (theme?.dark_logo ? theme?.dark_logo : defaultUserAvatar.src)} width={55} height={55} alt="Logo" className='rounded-full avatar-animation shadow-[5px_11px_30px_20px_rgba(255,255,255,0.3)]' />
                         }
                     </Link>
 

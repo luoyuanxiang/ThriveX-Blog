@@ -20,7 +20,11 @@ export default async (props: Props) => {
 
   return (
     <>
-      {/* <Lantern data={['新', '春', '快', '乐']} /> */}
+        {
+            data?.lantern && data?.lantern === 'true' &&
+            <Lantern data={['新', '春', '快', '乐']} />
+        }
+
 
       <Slide src={data?.swiper_image}>
         {/* 星空背景组件 */}

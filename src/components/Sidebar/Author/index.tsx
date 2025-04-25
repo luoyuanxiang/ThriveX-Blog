@@ -13,6 +13,7 @@ import { getUserDataAPI } from '@/api/user';
 import { getConfigDataAPI } from '@/api/project'
 import { User } from '@/types/app/user';
 import { Social, Theme } from '@/types/app/project';
+import defaultUserAvatar from '@/assets/image/avatar.png'
 
 const Author = async () => {
     const { data: user } = await getUserDataAPI() || { data: {} as User }
@@ -40,7 +41,7 @@ const Author = async () => {
         }}>
             {/* 作者头像 */}
             <div className="avatar flex justify-center items-center w-[90px] h-[90px] rounded-full bg-white shadow-md overflow-hidden">
-                <img src={user?.avatar} alt="" className="w-[90%] h-[90%] rounded-full transition-transform hover:scale-110" />
+                <img src={user?.avatar === null || user?.avatar === "" || user?.avatar === undefined ? defaultUserAvatar.src : user?.avatar} alt="" className="w-[90%] h-[90%] rounded-full transition-transform hover:scale-110" />
             </div>
 
             {/* 作者介绍 */}

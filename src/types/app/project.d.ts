@@ -21,6 +21,7 @@ export interface Web {
     description: string,
     keyword: string,
     footer: string,
+    confetti: string
 }
 
 export type ArticleLayout = "classics" | "card" | "waterfall" | ""
@@ -39,6 +40,7 @@ export interface Theme {
     covers: string,
     record_name: string,
     record_info: string
+    lantern: string
 }
 
 // 其他配置

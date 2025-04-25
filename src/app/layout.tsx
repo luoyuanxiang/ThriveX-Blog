@@ -37,7 +37,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
         <meta name="keywords" content={data?.keyword} />
-        <link rel="icon" href={data?.favicon || '/favicon.ico'} />
+        <link rel="icon" href={data?.favicon === '' || data?.favicon === undefined || data?.favicon === null ? '/favicon.ico' : data?.favicon} />
 
         {/* 字体 */}
         {/* 霞鹜文楷 */}
@@ -57,7 +57,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
       <body id='root' className={`dark:!bg-black-a transition-all`}>
         {/* 🎉 礼花效果 */}
-        {/* <Confetti /> */}
+        {
+            data?.confetti && data?.confetti === 'true' &&
+            <Confetti />
+        }
 
         {/* 进度条组件 */}
         <NProgress />

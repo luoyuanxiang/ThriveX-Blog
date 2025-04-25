@@ -7,6 +7,7 @@ export default async <T>(method: string, api: string, data?: any, caching = true
     try {
         const res = await fetch(`${url}${api}`, {
             method,
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
