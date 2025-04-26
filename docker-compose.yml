@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  client:
+    image: client
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_PROJECT_API=http://192.168.101.100:9999/api
+        - NEXT_PUBLIC_CACHING_TIME=0
+        - NEXT_PUBLIC_GAODE_KEY_CODE=
+        - NEXT_PUBLIC_GAODE_SECURITYJS_CODE=
+    ports:
+      - "9001:9001"
