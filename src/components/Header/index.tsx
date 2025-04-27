@@ -22,7 +22,7 @@ import defaultLogo from '@/assets/image/logo.png'
 
 const Header = () => {
     // 是否暗黑模式
-    const { isDark, setIsDark, setWeb, theme, setTheme } = useConfigStore()
+    const { isDark, setIsDark, setWeb, setTheme } = useConfigStore()
 
     // 获取项目配置
     const getConfigData = async () => {
