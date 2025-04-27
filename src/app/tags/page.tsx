@@ -5,8 +5,8 @@ import TagItemCard from "./components/TagItemCard"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "标签墙",
-  description: "标签墙",
+  title: "🏷️ 标签墙",
+  description: "🏷️ 标签墙",
 };
 
 export default async () => {

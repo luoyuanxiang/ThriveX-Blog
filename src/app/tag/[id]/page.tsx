@@ -21,7 +21,7 @@ export default async (props: Props) => {
 
   return (
     <>
-      <title>{`${name} - 标签`}</title>
+      <title>{`🔖 ${name} - 标签`}</title>
       <meta name="description" content={name} />
 
       <div>

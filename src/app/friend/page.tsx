@@ -15,8 +15,8 @@ import { User } from "@/types/app/user";
 import { Web } from "@/types/app/project";
 
 export const metadata: Metadata = {
-    title: "朋友圈",
-    description: "朋友圈",
+    title: "😇 朋友圈",
+    description: "😇 朋友圈",
 };
 
 export default async () => {

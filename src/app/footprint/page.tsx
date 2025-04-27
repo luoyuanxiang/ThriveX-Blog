@@ -172,8 +172,8 @@ export default function MapContainer() {
 
     return (
         <>
-            <title>那年走过的路</title>
-            <meta name="description" content="那年走过的路" />
+            <title>⛳️ 那年走过的路</title>
+            <meta name="description" content="⛳️ 那年走过的路" />
             <div id="container"></div>
 
             <Modal

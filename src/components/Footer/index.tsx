@@ -39,6 +39,15 @@ export default async () => {
             </div>
           </Tooltip>
         </div>
+        {
+          web?.icp && (
+            <div className='py-4 border-t dark:border-black-a transition-colors'>
+              <div className='flex justify-center items-center space-x-3'>
+                <Link href="https://beian.miit.gov.cn/" target='_blank' className='hover:text-primary transition-colors'>{web?.icp}</Link>
+              </div>
+            </div>
+          )
+        }
       </div>
     </>
   )

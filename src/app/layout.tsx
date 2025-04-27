@@ -15,6 +15,7 @@ import { Web } from '@/types/app/project';
 import "@/styles/index.scss";
 import "@/styles/tailwind.scss";
 import BaiduStatis from '@/components/BaiduStatis';
+import { Analytics } from "@vercel/analytics/react"
 
 // 加载本地字体
 const LXGWWenKai = localFont({
@@ -30,6 +31,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   console.log("🎉 开源地址：https://github.com/LiuYuYang01/ThriveX-Blog")
   console.log("🏕 作者主页：https://liuyuyang.net")
   console.log("🌟 觉得好用的话记得点个 Star 哦 🙏")
+  console.log("vercel", Analytics.name)
 
   return (
     <html lang="zh-CN" className={LXGWWenKai.className}>

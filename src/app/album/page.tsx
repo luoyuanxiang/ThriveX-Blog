@@ -28,51 +28,56 @@ export default function AlbumPage() {
     getAlbumCatePaging()
   }, [])
 
-  const handleClick = (id: number) => {
-    router.push(`/album/${id}`)
+  const handleClick = (data: Cate) => {
+    router.push(`/album/${data.id}?name=${data.name}`)
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-[90px]">
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="masonry-grid mb-12"
-        columnClassName="masonry-grid_column"
-      >
-        {list.map((cate, index) => (
-          <motion.div
-            key={cate.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="mb-6"
-          >
-            <div
-              className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer"
-              onClick={() => handleClick(cate.id!)}
+    <>
+      <title>🖼️ 照片墙</title>
+      <meta name="description" content="🖼️ 照片墙" />
+
+      <div className="container mx-auto px-4 py-8 pt-[90px]">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="masonry-grid mb-12"
+          columnClassName="masonry-grid_column"
+        >
+          {list.map((cate, index) => (
+            <motion.div
+              key={cate.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="mb-6"
             >
-              {/* 图片容器 */}
-              <div className="aspect-w-1 aspect-h-1 w-full">
-                <img
-                  src={cate.cover || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
-                  alt={cate.name}
-                  className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
+              <div
+                className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                onClick={() => handleClick(cate)}
+              >
+                {/* 图片容器 */}
+                <div className="aspect-w-1 aspect-h-1 w-full">
+                  <img
+                    src={cate.cover || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
+                    alt={cate.name}
+                    className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
 
-              {/* 分类标签 */}
-              <div className="absolute top-4 left-4 bg-black/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm">
-                {cate.name}
-              </div>
+                {/* 分类标签 */}
+                <div className="absolute top-4 left-4 bg-black/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm">
+                  {cate.name}
+                </div>
 
-              {/* 标题遮罩 */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                <h3 className="text-white font-medium text-lg">{cate.name}</h3>
+                {/* 标题遮罩 */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                  <h3 className="text-white font-medium text-lg">{cate.name}</h3>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
-      </Masonry>
-    </div>
+            </motion.div>
+          ))}
+        </Masonry>
+      </div>
+    </>
   )
 }

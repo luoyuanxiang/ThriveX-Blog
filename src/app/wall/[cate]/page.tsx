@@ -31,8 +31,8 @@ export default async (props: Props) => {
 
     return (
         <>
-            <title>留言墙</title>
-            <meta name="description" content="留言墙" />
+            <title>💌 留言墙</title>
+            <meta name="description" content="💌 留言墙" />
 
             <div className='py-16 border-b dark:border-[#4e5969] bg-[linear-gradient(to_right,#fff1eb_0%,#d0edfb_100%)] dark:bg-[linear-gradient(to_right,#232931_0%,#232931_100%)] transition-colors'>
                 <div className="flex flex-col items-center">

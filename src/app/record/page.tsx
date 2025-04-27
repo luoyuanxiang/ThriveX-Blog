@@ -24,6 +24,8 @@ export default async (props: Props) => {
 
   return (
     <>
+      <title>🏕️ 闪念</title>
+      <meta name="description" content="🏕️ 闪念" />
       <div className="bg-[linear-gradient(to_right,#fff1eb_0%,#d0edfb_100%)] dark:bg-[linear-gradient(to_right,#232931_0%,#232931_100%)]">
         <div className="w-full lg:w-[800px] px-6 lg:px-0 mx-auto pt-24 pb-10">
           <div className="flex items-center flex-col p-4 mb-10 border dark:border-black-b rounded-lg bg-white dark:bg-black-b bg-[url('https://bu.dusays.com/2024/11/27/6746e3ec88c4f.jpg')] bg-no-repeat bg-center bg-cover transition-colors">
