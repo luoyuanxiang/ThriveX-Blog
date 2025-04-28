@@ -52,6 +52,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
         {/* 百度统计 */}
         <BaiduStatis />
+        <Analytics/>
       </head>
 
       {/* 监听路由变化 */}
