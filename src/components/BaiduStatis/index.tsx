@@ -4,7 +4,7 @@ import Script from "next/script"
 
 export default () => {
     return (
-        <Script dangerouslySetInnerHTML={{
+        <Script strategy="afterInteractive" dangerouslySetInnerHTML={{
             __html: `
               var _hmt = _hmt || [];
               (function() {
