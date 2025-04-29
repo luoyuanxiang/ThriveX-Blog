@@ -1,10 +1,8 @@
-"use client"
-
 import Script from "next/script"
 
 export default () => {
     return (
-        <Script strategy="afterInteractive" dangerouslySetInnerHTML={{
+        <Script id="baidu-tongji" dangerouslySetInnerHTML={{
             __html: `
               var _hmt = _hmt || [];
               (function() {
