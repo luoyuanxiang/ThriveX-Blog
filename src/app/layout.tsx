@@ -39,6 +39,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
         <meta name="keywords" content={data?.keyword} />
+        <meta name="msvalidate.01" content="74DF692F4F214B84DAD7A0122DDB005B" />
         <link rel="icon" href={data?.favicon === '' || data?.favicon === undefined || data?.favicon === null ? '/favicon.ico' : data?.favicon} />
 
         {/* 字体 */}
