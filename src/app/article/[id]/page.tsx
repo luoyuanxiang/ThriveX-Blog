@@ -15,7 +15,7 @@ import { FaHotjar } from "react-icons/fa";
 import { AiOutlineComment } from "react-icons/ai";
 import { LuTimer } from "react-icons/lu";
 
-import dayjs from 'dayjs';
+import {daytimeFormat} from '@/utils/dayFormat'
 import { Article } from '@/types/app/article';
 import Encrypt from '@/components/Encrypt';
 import NotFound from '@/app/not-found';
@@ -80,7 +80,7 @@ export default async (props: Props) => {
 
                                 <div className="flex mb-2">
                                     <span className={`${iconSty} bg-[#5A9CF8]`}><LuTimer /></span>
-                                    <span>发布时间：{dayjs(+data?.createTime!).format('YYYY-MM-DD HH:mm')}</span>
+                                    <span>发布时间：{daytimeFormat(+data?.createTime!, 'YYYY-MM-DD HH:mm')}</span>
                                 </div>
                             </div>
                         </div>

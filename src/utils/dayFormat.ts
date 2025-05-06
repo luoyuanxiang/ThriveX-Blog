@@ -2,10 +2,14 @@ const dayjs = require('dayjs');
 const relativeTime = require('dayjs/plugin/relativeTime');
 const localeData = require('dayjs/plugin/localeData');
 const updateLocale = require('dayjs/plugin/updateLocale');
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc'
 
 dayjs.extend(relativeTime);
 dayjs.extend(localeData);
 dayjs.extend(updateLocale);
+dayjs.extend(utc)
+dayjs.extend(timezone);
 
 // 更新 locale 配置以自定义显示
 dayjs.updateLocale('en', {
@@ -39,4 +43,16 @@ export default function dayFormat(timestamp: number | string) {
     } else {
         return target.fromNow();
     }
+}
+
+/**
+ * 时间格式化
+ *
+ * @param timestamp 时间戳
+ * @param format 格式化字符串
+ */
+export function daytimeFormat(timestamp: number | string, format: string) {
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    dayjs.tz.setDefault(userTimezone);
+    return dayjs.tz(timestamp).format(format);
 }
