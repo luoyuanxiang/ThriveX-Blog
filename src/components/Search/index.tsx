@@ -62,8 +62,8 @@ export default ({ disclosure }: Props) => {
                                     <Input type="text" placeholder="请输入文章关键词" onChange={onSearchArticle} />
 
                                     <div className="mt-4">
-                                        {data?.result ? (
-                                            data?.result?.map(item => (
+                                        {data?.records ? (
+                                            data?.records?.map(item => (
                                                 <Link
                                                     key={item.id}
                                                     href={`/article/${item.id}`}

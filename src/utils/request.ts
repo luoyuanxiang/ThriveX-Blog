@@ -5,7 +5,7 @@ const cachingTime = +process.env.NEXT_PUBLIC_CACHING_TIME!
 
 export default async <T>(method: string, api: string, data?: any, caching = true) => {
     try {
-        const res = await fetch(`${url}${api}`, {
+        const res = await fetch(`${url}/web${api}`, {
             method,
             headers: {
                 'Content-Type': 'application/json'
@@ -13,7 +13,9 @@ export default async <T>(method: string, api: string, data?: any, caching = true
             [method === "POST" ? "body" : ""]: JSON.stringify(data ? data : {}),
             next: { revalidate: caching ? cachingTime : 0 }
         })
-        return await res?.json() as Promise<ResponseData<T>>;
+        const result = await res?.json() as Promise<ResponseData<T>>;
+        console.log("请求成功：", `${url}/web${api}`, result);
+        return result;
     } catch (error) {
         console.log("捕获到异常：", error);
     }

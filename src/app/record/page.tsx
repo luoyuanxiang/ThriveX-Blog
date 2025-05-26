@@ -36,7 +36,7 @@ export default async (props: Props) => {
 
           <div className="space-y-12">
             {
-              !!record?.result?.length && record?.result.map(item => (
+              !!record?.records?.length && record?.records.map(item => (
                 <div key={item.id} className="flex flex-col sm:flex-row">
                   <img src={user.avatar} alt="作者头像" width={56} height={56} className="hidden sm:block rounded-lg border dark:border-black-b h-14 mr-2 transition-colors" />
 
@@ -66,7 +66,7 @@ export default async (props: Props) => {
               ))
             }
 
-            <Show is={!record?.result?.length} children={<Empty info='闪念列表为空~' />} />
+            <Show is={!record?.records?.length} children={<Empty info='闪念列表为空~' />} />
           </div>
 
           <Pagination total={record?.pages} page={page} className="flex justify-center mt-5" />

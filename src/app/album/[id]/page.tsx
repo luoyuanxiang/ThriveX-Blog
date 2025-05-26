@@ -55,12 +55,12 @@ export default function AlbumPage(props: Props) {
 
       const { data } = response
       if (isLoadMore) {
-        setList(prev => [...prev, ...data.result])
+        setList(prev => [...prev, ...data.records])
       } else {
-        setList(data.result)
+        setList(data.records)
       }
 
-      setHasMore(data.result.length === 10)
+      setHasMore(data.records.length === 10)
     } catch (error) {
       console.error('Failed to fetch images:', error)
     } finally {

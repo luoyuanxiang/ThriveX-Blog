@@ -52,7 +52,7 @@ export default async (props: Props) => {
 
                 <div className='w-[90%] xl:w-[1200px] mx-auto mt-12 grid grid-cols-1 gap-1 xs:grid-cols-2 xs:gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4'>
                     {
-                        tallList.result?.map(item => (
+                        tallList.records?.map(item => (
                             <div key={item.id} className={`relative flex flex-col py-2 px-4 bg-[${item.color}] rounded-lg top-0 hover:-top-2 transition-all`}>
                                 <div className='flex justify-between items-center mt-2 text-xs text-gray-500 dark:text-[#8c9ab1]'>
                                     <span>{dayjs(+item.createTime!).format('YYYY-MM-DD HH:mm')}</span>

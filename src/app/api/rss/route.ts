@@ -17,8 +17,8 @@ export async function GET() {
     const { data: article } = await getArticlePagingAPI({ pagination: { page: 1, size: 8 } }) || { data: {} as Paginate<Article[]> }
     const { data: record } = await getRecordPagingAPI({ pagination: { page: 1, size: 8 } }) || { data: {} as Paginate<Record[]> }
 
-    const articleList = article?.result || []
-    const recordList = record?.result || []
+    const articleList = article?.records || []
+    const recordList = record?.records || []
 
     // 合并文章和说说，并根据时间排序
     const list = [...articleList, ...recordList].sort((a, b) => {

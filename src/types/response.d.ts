@@ -7,11 +7,11 @@ interface ResponseData<T> {
 interface Paginate<T> {
     next: boolean,
     prev: boolean,
-    page: number,
+    current: number,
     size: number,
     pages: number,
     total: number,
-    result: T
+    records: T
 }
 
 interface Page {

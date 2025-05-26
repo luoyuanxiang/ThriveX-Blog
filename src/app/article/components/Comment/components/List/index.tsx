@@ -44,9 +44,9 @@ const CommentList = forwardRef(({ id, reply }: Props, ref) => {
     // 这里的逻辑有点乱，暂时先这样，有空再优化！！！
     return (
         <div className='CommentListComponent'>
-            <Show is={!!data.result?.length} children={
+            <Show is={!!data.records?.length} children={
                 <ul className="list">
-                    {data.result?.map(one => (
+                    {data.records?.map(one => (
                         <li className="item" key={one.id}>
                             <div className="comment_user_one">
                                 {
@@ -201,7 +201,7 @@ const CommentList = forwardRef(({ id, reply }: Props, ref) => {
                 </ul>
             } />
 
-            <Show is={!data.result?.length} children={<Empty info='评论列表为空~'></Empty>} />
+            <Show is={!data.records?.length} children={<Empty info='评论列表为空~'></Empty>} />
 
             <Pagination
                 showControls

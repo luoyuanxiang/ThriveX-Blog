@@ -32,7 +32,7 @@ const Card = async ({ data }: CardProps) => {
 
     return (
         <div className="space-y-4">
-            {data?.result?.map((item, index) => (
+            {data?.records?.map((item, index) => (
                 <div key={item.id} className="relative overflow-hidden flex h-[190px] md:h-60 lg:h-52 xl:h-60 bg-black-b tw_container">
                     <div className="relative w-full py-5 px-5 sm:px-10 lg:px-5 xl:px-10 z-20">
                         <Link href={`/article/${item.id}`} className='flex flex-col justify-between h-full text-center sm:text-start'>
@@ -52,7 +52,7 @@ const Card = async ({ data }: CardProps) => {
 
                                 <div className='flex items-center text-xs text-white'>
                                     <span className='pr-1'><GoTag className='p-1 mt-[-2px] mr-[3px] text-[23px] text-white rounded-full align-middle bg-[#f5a630]' /></span>
-                                    <span>{item.cateList[0]?.name}</span>
+                                    <span>{item.cateNames}</span>
                                 </div>
                             </div>
                         </Link>

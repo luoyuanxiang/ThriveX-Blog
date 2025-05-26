@@ -30,4 +30,6 @@ export interface Article {
     prev: { id: number, title: string },
     next: { id: number, title: string },
     createTime?: string,
+    cateNames: string,
+    tagNames: string
 }

@@ -21,7 +21,7 @@ export default function AlbumPage() {
 
   const getAlbumCatePaging = async () => {
     const { data } = await getAlbumCatePagingAPI(1, 9999) || { data: {} as Paginate<Cate[]> }
-    setList(data.result)
+    setList(data.records)
   }
 
   useEffect(() => {

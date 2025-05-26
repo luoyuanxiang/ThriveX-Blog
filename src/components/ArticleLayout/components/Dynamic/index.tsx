@@ -12,7 +12,7 @@ export default function Dynamic({ className }: { className?: string }) {
 
     const getRecordList = async () => {
         const { data } = await getRecordPagingAPI({ pagination: { page: 1, size: 8 } }) || { data: {} as Paginate<Record[]> }
-        setList(data?.result || [])
+        setList(data?.records || [])
     }
 
     useEffect(() => {

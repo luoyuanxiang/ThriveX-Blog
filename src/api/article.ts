@@ -13,17 +13,12 @@ export const getArticleListAPI = async () => {
 
 // 分页获取文章数据
 export const getArticlePagingAPI = async (data: QueryData) => {
-    return await Request<Paginate<Article[]>>("POST", `/article/paging?page=${data.pagination?.page}&size=${data.pagination?.size ? data.pagination?.size : 8}`, data.query);
+    return await Request<Paginate<Article[]>>("POST", `/article/paging?current=${data.pagination?.page}&size=${data.pagination?.size ? data.pagination?.size : 8}`, data.query);
 }
 
 // 获取随机文章列表
 export const getRandomArticleListAPI = async () => {
     return await Request<Article[]>("GET", "/article/random");
-}
-
-// 获取推荐文章列表
-export const getRecommendedArticleListAPI = async () => {
-    return await Request<Article[]>("GET", "/article/hot");
 }
 
 // 递增浏览量

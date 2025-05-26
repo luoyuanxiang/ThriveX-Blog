@@ -32,7 +32,7 @@ const Classics = async ({ data }: ClassicsProps) => {
 
     return (
         <div className="space-y-4">
-            {data?.result?.map((item, index) => (
+            {data?.records?.map((item, index) => (
                 <div key={item.id} className="relative overflow-hidden flex h-[190px] md:h-60 lg:h-52 xl:h-60 bg-black-b tw_container">
                     {index % 2 === 0 && (
                         <div
@@ -63,7 +63,7 @@ const Classics = async ({ data }: ClassicsProps) => {
 
                                 <div className='flex items-center text-xs text-white'>
                                     <span className='pr-1'><GoTag className='p-1 mt-[-2px] mr-[3px] text-[23px] text-white rounded-full align-middle bg-[#f5a630]' /></span>
-                                    <span>{item.cateList[0]?.name}</span>
+                                    <span>{item.cateNames}</span>
                                 </div>
                             </div>
                         </Link>

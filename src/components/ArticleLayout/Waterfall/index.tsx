@@ -28,7 +28,7 @@ export default ({ data }: WaterfallProps) => {
                 columnClassName="masonry-grid_column"
             >
                 {
-                    data.result.map(item => (
+                    data.records.map(item => (
                         <div key={item.id} className='group overflow-hidden mt-2.5 rounded-xl bg-white dark:bg-black-b border dark:border-black-b hover:shadow-[0_10px_20px_1px_rgb(83,157,253,.1)] transition-colors cursor-pointer'>
                             <Link href={`/article/${item.id}`}>
                                 <div className='overflow-hidden h-32'>
