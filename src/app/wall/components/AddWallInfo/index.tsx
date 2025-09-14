@@ -9,7 +9,6 @@ import { Bounce, toast, ToastContainer, ToastOptions } from 'react-toastify';
 import HCaptchaType from '@hcaptcha/react-hcaptcha';
 import HCaptcha from '@/components/HCaptcha';
 import 'react-toastify/dist/ReactToastify.css';
-import { MdOutlineAdd } from 'react-icons/md';
 
 const toastConfig: ToastOptions = {
   position: 'top-right',
@@ -55,22 +54,22 @@ export default () => {
     formState: { errors },
     trigger,
   } = useForm<Wall>({ defaultValues });
-  
+
   const onSubmit: SubmitHandler<Wall> = async (data, event) => {
     event?.preventDefault();
-    
+
     // 清除之前的人机验证错误
     setCaptchaError('');
 
     if (!captchaToken) return setCaptchaError('请完成人机验证');
-    
+
     const { code, message } = (await addWallDataAPI({ ...data, createTime: Date.now().toString(), h_captcha_response: captchaToken })) || { code: 0, message: '' };
 
     if (code !== 200) {
       captchaRef.current?.resetCaptcha();
       return toast.error(message, toastConfig);
     }
-    
+
     // 清除验证相关状态
     setCaptchaError('');
     setCaptchaToken(null);
@@ -93,9 +92,13 @@ export default () => {
 
   return (
     <>
-      <div className="fixed top-[15%] right-[5%] flex justify-center items-center w-[70px] h-[70px] rounded-full bg-black-b cursor-pointer z-50" onClick={onOpen}>
+      {/* <div className="fixed top-[15%] right-[5%] flex justify-center items-center w-[70px] h-[70px] rounded-full bg-black-b cursor-pointer z-50" onClick={onOpen}>
         <MdOutlineAdd className="text-white text-5xl" />
-      </div>
+      </div> */}
+
+      <Button color="primary" variant="shadow" onPress={onOpen}>
+        点击留言
+      </Button>
 
       <Modal
         size="lg"
@@ -109,7 +112,7 @@ export default () => {
         <ModalContent>
           {() => (
             <>
-              <ModalHeader className="flex flex-col gap-1">添加留言</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">留言</ModalHeader>
 
               <ModalBody>
                 <Controller
@@ -193,7 +196,7 @@ export default () => {
                     </>
                   )}
                 />
-                
+
                 {/* 人机验证 */}
                 <div className="flex flex-col">
                   <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess} />

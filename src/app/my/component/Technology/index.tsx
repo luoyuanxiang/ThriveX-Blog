@@ -17,7 +17,7 @@ export default ({ list }: { list: string[] }) => {
       <div data-aos="zoom-in" className="w-full md:w-7/12 flex flex-col items-center justify-center mt-52 md:mt-0">
         <div className="text-center text-xl mb-8">我的技术栈</div>
 
-        <div className="flex justify-center w-4/6">
+        <div className="flex justify-center w-3/6">
           <IconCloud iconSlugs={list} />
         </div>
       </div>

@@ -19,11 +19,6 @@ body {
     // font-family:'Yozai Medium';
 }
 
-/* 为整个页面设置滚动条样式 */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
 /* 滚动条槽 */
 // ::-webkit-scrollbar-track {
 //     background: #f1f1f1;
@@ -40,9 +35,15 @@ body {
     border: 2px solid #ffffff00;
 }
 
+/* 为整个页面设置滚动条样式 */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 // 文字阴影

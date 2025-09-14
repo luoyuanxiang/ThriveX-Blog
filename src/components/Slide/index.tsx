@@ -1,8 +1,9 @@
+'use client';
+
 import { ReactNode } from 'react';
 import Ripple from '@/components/Ripple';
 import { getRandom } from '@/utils';
-import { getWebConfigDataAPI } from '@/api/config';
-import { Theme } from '@/types/app/config';
+import { useConfigStore } from '@/stores';
 
 interface Props {
   src?: string; // 图片列表
@@ -10,12 +11,9 @@ interface Props {
   children?: ReactNode;
 }
 
-export default async ({ src, isRipple = true, children }: Props) => {
-  const {
-    data: { value: data },
-  } = (await getWebConfigDataAPI<{ value: Theme }>('theme')) || { data: { value: {} as Theme } };
-
-  const covers = data.covers || [];
+export default ({ src, isRipple = true, children }: Props) => {
+  const theme = useConfigStore((state) => state.theme);
+  const covers = theme.covers || [];
 
   const sty = {
     backgroundImage: `url(${src ? src : covers[getRandom(0, covers.length - 1)]})`,
