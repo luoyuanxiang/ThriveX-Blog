@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getWebConfigDataAPI } from '@/api/config';
-import { getUserDataAPI } from '@/api/user';
+import { getAuthorDataAPI } from '@/api/user';
 import { User } from '@/types/app/user';
 import { Web } from '@/types/app/config';
 import Tooltip from './components/Tooltip';
@@ -10,7 +10,7 @@ import animals from './images/animals.webp';
 import ICP from './images/ICP.png';
 
 export default async () => {
-  const { data: user } = (await getUserDataAPI()) || { data: {} as User };
+  const { data: user } = (await getAuthorDataAPI()) || { data: {} as User };
   const {
     data: { value: web },
   } = (await getWebConfigDataAPI<{ value: Web }>('web')) || { data: { value: {} as Web } };

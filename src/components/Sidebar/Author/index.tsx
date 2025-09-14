@@ -9,13 +9,13 @@ import Juejin from '@/assets/svg/socializing/Juejin.svg';
 import QQ from '@/assets/svg/socializing/QQ.svg';
 import Weixin from '@/assets/svg/socializing/Weixin.svg';
 
-import { getUserDataAPI } from '@/api/user';
+import { getAuthorDataAPI } from '@/api/user';
 import { getWebConfigDataAPI } from '@/api/config';
 import { User } from '@/types/app/user';
 import { Social, Theme } from '@/types/app/config';
 
 const Author = async () => {
-  const { data: user } = (await getUserDataAPI()) || { data: {} as User };
+  const { data: user } = (await getAuthorDataAPI()) || { data: {} as User };
   const {
     data: { value: theme },
   } = (await getWebConfigDataAPI<{ value: Theme }>('theme')) || { data: { value: {} as Theme } };

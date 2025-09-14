@@ -55,7 +55,7 @@ export default () => {
     formState: { errors },
     trigger,
   } = useForm<Web>({ defaultValues: {} as Web });
-  
+
   const onSubmit: SubmitHandler<Web> = async (data, event) => {
     event?.preventDefault();
 
@@ -208,7 +208,7 @@ export default () => {
                     </>
                   )}
                 />
-                
+
                 {/* 人机验证 */}
                 <div className="flex flex-col">
                   <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess} />

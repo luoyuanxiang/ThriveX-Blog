@@ -18,6 +18,7 @@ import '@/styles/index.scss';
 import '@/styles/tailwind.scss';
 import BaiduStatis from '@/components/BaiduStatis';
 import FloatingBlock from '@/components/FloatingBlock';
+import InjectData from '@/components/InjectData';
 
 // 加载本地字体
 const LXGWWenKai = localFont({
@@ -53,6 +54,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <RouteChangeHandler />
 
       <body id="root" className={`dark:!bg-black-a`}>
+        {/* 数据注入 */}
+        <InjectData />
         {/* 🎉 礼花效果 */}
         {/* <Confetti /> */}
 

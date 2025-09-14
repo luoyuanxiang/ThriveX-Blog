@@ -4,10 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { addCommentDataAPI } from '@/api/comment';
 import { Bounce, ToastOptions, toast } from 'react-toastify';
-import { Spinner } from '@heroui/react';
+import { Spinner, Popover, PopoverTrigger, PopoverContent } from '@heroui/react';
 import HCaptchaType from '@hcaptcha/react-hcaptcha';
 import List from './components/List';
 import HCaptcha from '@/components/HCaptcha';
+import EmojiBag from '@/components/EmojiBag';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
 
@@ -42,6 +43,7 @@ const CommentForm = ({ articleId }: Props) => {
   const [placeholder, setPlaceholder] = useState('来发一针见血的评论吧~');
 
   const [loading, setLoading] = useState(false);
+  const [isEmojiOpen, setIsEmojiOpen] = useState(false);
 
   const commentRef = useRef<{ getCommentList: () => void }>(null);
 
@@ -126,13 +128,39 @@ const CommentForm = ({ articleId }: Props) => {
     setPlaceholder(`回复评论给：${name}`);
   };
 
+  // 选择表情后插入到当前光标位置并同步表单
+  const handleEmojiSelect = (emoji: string) => {
+    const textarea = contentRef.current;
+    if (!textarea) return;
+
+    const currentValue = textarea.value || '';
+    const start = textarea.selectionStart ?? currentValue.length;
+    const end = textarea.selectionEnd ?? currentValue.length;
+
+    const newValue = currentValue.slice(0, start) + emoji + currentValue.slice(end);
+
+    // 更新 DOM 与 react-hook-form 值
+    textarea.value = newValue;
+    setValue('content', newValue, { shouldDirty: true, shouldValidate: true });
+
+    // 将光标移动到插入表情后
+    const newCaretPos = start + emoji.length;
+    requestAnimationFrame(() => {
+      textarea.focus();
+      textarea.setSelectionRange(newCaretPos, newCaretPos);
+    });
+
+    // 选择后关闭面板
+    setIsEmojiOpen(false);
+  };
+
   return (
     <div className="CommentComponent">
       <div className="mt-[70px]">
         <div className="title relative top-0 left-0 w-full h-[1px] mb-10 bg-[#f7f7f7] dark:bg-black-b  "></div>
 
         <form className="flex flex-wrap justify-between mt-4 space-y-2 text-xs xs:text-sm" onSubmit={handleSubmit(onSubmit)}>
-          <div className="w-full">
+          <div className="w-full relative">
             <textarea
               {...register('content', { required: '请输入内容' })}
               placeholder={placeholder}
@@ -143,6 +171,23 @@ const CommentForm = ({ articleId }: Props) => {
               }}
             />
             <span className="text-red-400 text-sm pl-3">{errors.content?.message}</span>
+
+            {/* 表情按钮与面板（HeroUI Popover） */}
+            <div className="absolute bottom-5 right-5">
+              <Popover placement="bottom" isOpen={isEmojiOpen} onOpenChange={setIsEmojiOpen}>
+                <PopoverTrigger>
+                  <button type="button" className="py-1 px-2 text-2xl rounded-md hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                    😀
+                  </button>
+                </PopoverTrigger>
+
+                <PopoverContent>
+                  <div className="max-w-96 z-50">
+                    <EmojiBag onEmojiSelect={handleEmojiSelect} />
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
           </div>
 
           <div className="flex flex-col w-[32%]">

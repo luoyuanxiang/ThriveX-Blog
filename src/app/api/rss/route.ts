@@ -8,12 +8,12 @@ import { Record } from '@/types/app/record'
 
 import { getArticlePagingAPI } from '@/api/article'
 import { getWebConfigDataAPI } from '@/api/config'
-import { getUserDataAPI } from '@/api/user'
+import { getAuthorDataAPI } from '@/api/user'
 import { getRecordPagingAPI } from '@/api/record';
 
 export async function GET() {
     const { data: { value: web } } = (await getWebConfigDataAPI<{ value: Web }>('web')) || { data: { value: {} as Web } };
-    const { data: user } = await getUserDataAPI() || { data: {} as User }
+    const { data: user } = await getAuthorDataAPI() || { data: {} as User }
     const { data: article } = await getArticlePagingAPI({ pagination: { page: 1, size: 8 } }) || { data: {} as Paginate<Article[]> }
     const { data: record } = await getRecordPagingAPI({ pagination: { page: 1, size: 8 } }) || { data: {} as Paginate<Record[]> }
 
