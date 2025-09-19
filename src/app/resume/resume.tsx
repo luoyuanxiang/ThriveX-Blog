@@ -254,7 +254,7 @@ export default ({ data }: { data: Resume }) => {
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 flex items-center text-sm">项目介绍</h5>
                             <div className="text-gray-600 dark:text-gray-300 text-sm">
-                              {project.description?.map((item: string, i: number) => (
+                              {Array.isArray(project.description) && project.description?.map((item: string, i: number) => (
                                 <p key={i} className="mb-1.5">
                                   {item}
                                 </p>
@@ -284,7 +284,7 @@ export default ({ data }: { data: Resume }) => {
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">项目亮点</h5>
                             <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
-                              {project.highlights.map((highlight, i) => (
+                              {Array.isArray(project.highlights) && project.highlights.map((highlight, i) => (
                                 <li key={i} className="flex items-center">
                                   <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
                                   <span>{highlight}</span>
@@ -298,7 +298,7 @@ export default ({ data }: { data: Resume }) => {
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">项目难点</h5>
                             <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
-                              {project.challenges.map((item, i) => (
+                              {Array.isArray(project.challenges) && project.challenges.map((item, i) => (
                                 <li key={i} className="flex items-center">
                                   <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
                                   <span>{item}</span>
