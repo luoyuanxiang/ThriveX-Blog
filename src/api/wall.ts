@@ -6,11 +6,6 @@ export const addWallDataAPI = async (data: Wall) => {
     return await Request('POST', `/wall`, data);
 }
 
-// 获取留言列表
-export const getWallListAPI = async () => {
-    return await Request<Paginate<Wall[]>>('POST', `/wall/paging`);
-}
-
 // 获取留言分类列表
 export const getCateListAPI = async () => {
     return await Request<Cate[]>('GET', `/wall/cate`);

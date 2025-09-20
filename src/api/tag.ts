@@ -16,8 +16,3 @@ export const getTagListWithArticleCountAPI = async () => {
 export const getTagArticleListAPI = async (id: number, page: number) => {
     return await Request<Paginate<Article[]>>('GET', `/article/tag/${id}?page=${page}`)
 }
-
-// 分页获取标签数据
-export const getTagPagingAPI = async (data: QueryData) => {
-    return await Request<Paginate<Tag[]>>('POST', `/tag/paging?page=${data.pagination?.page}&&size=8`, data.query);
-}
