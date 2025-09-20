@@ -1,5 +1,5 @@
 import Request from '@/utils/request';
-import { Comment } from '@/types/app/comment';
+import {Comment} from '@/types/app/comment';
 
 // 新增评论
 export const addCommentDataAPI = async (data: Comment) => {

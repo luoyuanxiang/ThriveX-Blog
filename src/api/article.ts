@@ -1,5 +1,5 @@
 import Request from '@/utils/request';
-import { Article } from '@/types/app/article';
+import {Article} from '@/types/app/article';
 
 // 获取指定文章数据
 export const getArticleDataAPI = async (id: number, password?: string) => {

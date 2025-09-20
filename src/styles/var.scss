@@ -28,31 +28,31 @@ $shadeColor: var(--shadeColor, 0 2px 8px rgba(186, 186, 186, 0.15));
 
 // 封装CSS容器样式
 @mixin container {
-    border-radius: 5px;
-    border: 1px solid #eee;
-    transition: all 0.3s;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  transition: all 0.3s;
 
-    &:hover {
-        box-shadow: 0 2px 8px rgba(186, 186, 186, 0.15);
-    }
+  &:hover {
+    box-shadow: 0 2px 8px rgba(186, 186, 186, 0.15);
+  }
 }
 
 // 封装右侧模块标题样式
 @mixin titleRight {
-    .title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 15px;
-        border-bottom: 1px solid $underBorderColor;
-        font-size: 17px;
-        font-weight: 400;
-        color: $textColor;
-        transition: all $move;
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $underBorderColor;
+    font-size: 17px;
+    font-weight: 400;
+    color: $textColor;
+    transition: all $move;
 
-        img {
-            width: 30px;
-            height: 20px;
-        }
+    img {
+      width: 30px;
+      height: 20px;
     }
+  }
 }

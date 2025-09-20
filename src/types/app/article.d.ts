@@ -1,5 +1,5 @@
-import { Cate } from './cate'
-import { Tag } from './tag'
+import {Cate} from './cate'
+import {Tag} from './tag'
 
 export type Status = 'show' | 'no_home' | 'hide'
 

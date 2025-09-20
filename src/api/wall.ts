@@ -1,5 +1,5 @@
 import Request from '@/utils/request';
-import { Wall, Cate } from '@/types/app/wall';
+import {Cate, Wall} from '@/types/app/wall';
 
 // 新增留言
 export const addWallDataAPI = async (data: Wall) => {

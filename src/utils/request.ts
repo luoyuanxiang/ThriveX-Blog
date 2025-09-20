@@ -11,7 +11,7 @@ export default async <T>(method: string, api: string, data?: any, caching = true
                 'Content-Type': 'application/json'
             },
             [method === 'POST' ? 'body' : '']: JSON.stringify(data ? data : {}),
-            next: { revalidate: caching ? cachingTime : 1 }
+            next: {revalidate: caching ? cachingTime : 1}
         })
 
         return res?.json() as Promise<ResponseData<T>>;

@@ -1,6 +1,6 @@
 import Request from '@/utils/request'
-import { Tag } from '@/types/app/tag'
-import { Article } from '@/types/app/article';
+import {Tag} from '@/types/app/tag'
+import {Article} from '@/types/app/article';
 
 // 获取标签列表
 export const getTagListAPI = async () => {

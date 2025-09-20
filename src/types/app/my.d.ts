@@ -11,7 +11,7 @@ export interface InfoTwo {
     left_tags: string[];
     right_tags: string[];
     know_me: string;
-};
+}
 
 export interface Character {
     value: number;

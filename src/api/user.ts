@@ -1,4 +1,4 @@
-import { User } from '@/types/app/user'
+import {User} from '@/types/app/user'
 import Request from '@/utils/request'
 
 // 获取作者信息

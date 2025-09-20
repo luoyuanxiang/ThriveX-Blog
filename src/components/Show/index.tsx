@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
 
-export default ({ is, children }: { is: boolean; children: ReactNode }) => {
-  return <>{is ? children : null}</>;
+export default ({is, children}: { is: boolean; children: ReactNode }) => {
+    return <>{is ? children : null}</>;
 };
