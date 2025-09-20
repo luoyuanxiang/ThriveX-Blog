@@ -21,6 +21,7 @@ import {Bounce, toast, ToastOptions} from 'react-toastify';
 import HCaptchaType from '@hcaptcha/react-hcaptcha';
 import HCaptcha from '@/components/HCaptcha';
 import 'react-toastify/dist/ReactToastify.css';
+import {useConfigStore} from '@/stores'
 
 const toastConfig: ToastOptions = {
     position: 'top-right',
@@ -45,6 +46,12 @@ export default () => {
 
     // 获取网站类型列表
     const [typeList, setTypeList] = useState<WebType[]>([]);
+
+    const {other} = useConfigStore();
+
+    // 是否开启人机验证
+    const isHcaptcha = other?.isHcaptcha
+
     const getWebTypeList = async () => {
         const {data} = (await getWebTypeListAPI()) || {data: [] as WebType[]};
         setTypeList(data.filter((item) => !item.isAdmin));
@@ -74,24 +81,26 @@ export default () => {
         // 清除之前的人机验证错误
         setCaptchaError('');
 
-        if (!captchaToken) return setCaptchaError('请完成人机验证');
+        if (isHcaptcha && !captchaToken) return setCaptchaError('请完成人机验证');
 
         setLoading(true);
         const {code, message} = (await addWebDataAPI({
             ...data,
             createTime: Date.now().toString(),
-            h_captcha_response: captchaToken
+            h_captcha_response: captchaToken || ''
         })) || {code: 0, message: ''};
         if (code !== 200) {
-            captchaRef.current?.resetCaptcha();
+            if (isHcaptcha) captchaRef.current?.resetCaptcha();
             return toast.error(message, toastConfig);
         }
         setLoading(false);
 
         // 清除验证相关状态
-        setCaptchaError('');
-        setCaptchaToken(null);
-        captchaRef.current?.resetCaptcha();
+        if (isHcaptcha) {
+            setCaptchaError('');
+            setCaptchaToken(null);
+            captchaRef.current?.resetCaptcha();
+        }
 
         localStorage.setItem('toastMessage', '🎉 提交成功, 请等待审核!');
         window.location.reload();
@@ -260,11 +269,15 @@ export default () => {
                                 />
 
                                 {/* 人机验证 */}
-                                <div className="flex flex-col">
-                                    <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess}/>
-                                    {captchaError &&
-                                        <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>}
-                                </div>
+                                {
+                                    isHcaptcha && (
+                                        <div className="flex flex-col">
+                                            <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess}/>
+                                            {captchaError &&
+                                                <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>}
+                                        </div>
+                                    )
+                                }
                             </ModalBody>
 
                             <ModalFooter>

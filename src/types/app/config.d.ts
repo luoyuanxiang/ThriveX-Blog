@@ -47,6 +47,7 @@ export interface Theme {
 export interface Other {
     baidu_token: string,
     hcaptcha_key: string,
+    isHcaptcha: boolean,
 }
 
 

@@ -11,6 +11,7 @@ import HCaptcha from '@/components/HCaptcha';
 import EmojiBag from '@/components/EmojiBag';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
+import {useConfigStore} from '@/stores'
 
 interface Props {
     articleId: number;
@@ -50,6 +51,10 @@ const CommentForm = ({articleId}: Props) => {
     const captchaRef = useRef<HCaptchaType>(null);
     const [captchaToken, setCaptchaToken] = useState<string | null>(null);
     const [captchaError, setCaptchaError] = useState<string>('');
+    const {other} = useConfigStore();
+
+    // 是否开启人机验证
+    const isHcaptcha = other?.isHcaptcha;
 
     const {
         register,
@@ -71,7 +76,7 @@ const CommentForm = ({articleId}: Props) => {
         // 清除之前的人机验证错误
         setCaptchaError('');
 
-        if (!captchaToken) return setCaptchaError('请完成人机验证');
+        if (isHcaptcha && !captchaToken) return setCaptchaError('请完成人机验证');
 
         setLoading(true);
 
@@ -93,7 +98,9 @@ const CommentForm = ({articleId}: Props) => {
         })) || {code: 0, message: ''};
 
         if (code !== 200) {
-            captchaRef.current?.resetCaptcha();
+            if (isHcaptcha) {
+                captchaRef.current?.resetCaptcha();
+            }
             return toast.error('发布评论失败：' + message, toastConfig);
         }
 
@@ -107,9 +114,11 @@ const CommentForm = ({articleId}: Props) => {
         setLoading(false);
 
         // 清除验证相关状态
-        setCaptchaError('');
-        setCaptchaToken(null);
-        captchaRef.current?.resetCaptcha();
+        if (isHcaptcha) {
+            setCaptchaError('');
+            setCaptchaToken(null);
+            captchaRef.current?.resetCaptcha();
+        }
 
         // 提交成功后把评论的数据持久化到本地
         localStorage.setItem('comment_data', JSON.stringify(data));
@@ -231,10 +240,14 @@ const CommentForm = ({articleId}: Props) => {
                         <span className="text-red-400 text-sm pl-3 mt-1">{errors.url?.message}</span>
                     </div>
 
-                    <div className="flex flex-col">
-                        <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess}/>
-                        {captchaError && <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>}
-                    </div>
+                    {
+                        isHcaptcha && (
+                            <div className="flex flex-col">
+                                <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess}/>
+                                {captchaError && <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>}
+                            </div>
+                        )
+                    }
 
                     {loading ? (
                         <div className="w-full h-10 flex justify-center !mt-4">
