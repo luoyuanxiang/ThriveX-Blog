@@ -13,7 +13,7 @@ const RouteChangeHandler: React.FC = () => {
 
     if (typeof document !== 'undefined') {
         // 网站变灰
-        new GrayscaleController(web?.grayscaleDates)
+        new GrayscaleController()
         // 保存原始标题
         const originalTitle = document.title;
         const favicon: HTMLLinkElement | null = document.querySelector('link[rel="icon"]');
