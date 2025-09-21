@@ -15,6 +15,7 @@ import '@/styles/tailwind.scss';
 import BaiduStatis from '@/components/BaiduStatis';
 import FloatingBlock from '@/components/FloatingBlock';
 import InjectData from '@/components/InjectData';
+import { Analytics } from '@vercel/analytics/react'
 
 // 加载本地字体
 const LXGWWenKai = localFont({
@@ -44,6 +45,7 @@ export default async function RootLayout({children}: Readonly<{ children: React.
 
             {/* 百度统计 */}
             <BaiduStatis/>
+            <Analytics />
         </head>
 
         {/* 监听路由变化 */}
