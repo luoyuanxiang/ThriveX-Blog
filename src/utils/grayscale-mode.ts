@@ -14,7 +14,6 @@ class GrayscaleController {
         ];
 
         this.grayscaleDates = [...new Set([...defaultDates, ...(customDates || [])])];
-        console.log('Grayscale dates:', this.grayscaleDates);
         this.init();
     }
 
@@ -121,12 +120,14 @@ class GrayscaleController {
     }
 }
 
-// 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', () => {
-    // 可以传入自定义日期覆盖或补充默认日期
-    // 例如：new GrayscaleController(['2024-01-01', '2024-10-01']);
-    new GrayscaleController();
-});
+if (typeof document !== 'undefined') {
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        // 可以传入自定义日期覆盖或补充默认日期
+        // 例如：new GrayscaleController(['2024-01-01', '2024-10-01']);
+        new GrayscaleController();
+    });
+}
 
 // 导出类供其他模块使用（如果需要）
 export default GrayscaleController;

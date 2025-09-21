@@ -1,92 +1,41 @@
 'use client';
 
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {usePathname} from 'next/navigation';
 import {useConfigStore} from '@/stores'
 import {Web} from '@/types/app/config'
-import GrayscaleController from '@/utils/ grayscale-mode'
+import GrayscaleController from '@/utils/grayscale-mode'
 
 // 监听路由变化
 const RouteChangeHandler: React.FC = () => {
-    const web: Web = useConfigStore(state => state.web)
+    const web: Web = useConfigStore((state) => state.web);
     const pathname = usePathname();
+    const titleTimer = useRef<NodeJS.Timeout | null>(null);
+    const originalTitle = useRef<string>('');
 
     if (typeof document !== 'undefined') {
         // 网站变灰
-        new GrayscaleController()
+        new GrayscaleController();
         // 保存原始标题
-        const originalTitle = document.title;
-        const favicon: HTMLLinkElement | null = document.querySelector('link[rel="icon"]');
-        const originalFavicon = favicon ? (favicon as HTMLLinkElement).href : '';
-
-        // 配置选项
-        const titleConfig = {
-            awayPrefix: '🔙 ',
-            awayText: web?.leaveTitle,
-            blinkInterval: 800, // 闪烁间隔时间(ms)
-            notificationFavicon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY1MDAwIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0MzJoLTg0bDY0IDEwNGwtMzIgMzJoMTA0bDMtMzJsNjQgMTA0aC04NGMtMTcuNyAwLTMyLTE0LjMtMzItMzJ2LTEyOGMwLTE3LjctMTQuMy0zMi0zMi0zMkg4MGMtMTcuNyAwLTMyIDE0LjMtMzIgMzJ2MTI4YzAgMTcuNyAxNC4zIDMyIDMyIDMyaDE3NmM4LjkgMCAxNi40LTMuNSAyMi43LTkuOGw2NC42LTY0LjZjNi4zLTYuMyA5LjgtMTMuOCA5LjgtMjIuN3YtMTI4YzAtMTcuNy0xNC4zLTMyLTMyLTMyem0xMjggMTU2aC00OGMtMTMuMyAwLTI0LTEwLjctMjQtMjRzMTAuNy0yNCAyNC0yNGg0OGMxMy4zIDAgMjQgMTAuNyAyNCAyNHMtMTAuNyAyNC0yNCAyNHoiLz48L3N2Zz4='
-        };
-
-        let blinkTimer: string | number | NodeJS.Timeout | null | undefined = null;
-        let isAway = !web?.dynamicTitle;
-
-        // 切换到离开状态的标题
-        function setAwayTitle() {
-            if (isAway) return;
-
-            isAway = true;
-            let isBlinkState = false;
-
-            // 改变favicon作为视觉提示
-            if (favicon) {
-                favicon.href = titleConfig.notificationFavicon;
-            }
-
-            // 清除可能存在的计时器
-            if (blinkTimer) clearInterval(blinkTimer);
-
-            // 设置闪烁效果
-            blinkTimer = setInterval(() => {
-                isBlinkState = !isBlinkState;
-                document.title = isBlinkState
-                    ? `${titleConfig.awayPrefix}${titleConfig.awayText}`
-                    : titleConfig.awayText;
-            }, titleConfig.blinkInterval);
-        }
-
-        // 恢复原始标题
-        function restoreOriginalTitle() {
-            if (!isAway) return;
-
-            isAway = false;
-            // 清除计时器
-            if (blinkTimer) {
-                clearInterval(blinkTimer);
-                blinkTimer = null;
-            }
-
-            // 恢复标题和favicon
-            document.title = originalTitle;
-            if (favicon && originalFavicon) {
-                favicon.href = originalFavicon;
-            }
-        }
-
-        // 监听页面可见性变化
-        document.addEventListener('visibilitychange', () => {
+        originalTitle.current = document.title;
+        const handleVisibilityChange = () => {
             if (document.hidden) {
-                setAwayTitle();
+                document.title = web.leaveTitle;
+                if (titleTimer.current) clearTimeout(titleTimer.current);
             } else {
-                restoreOriginalTitle();
+                document.title = web.backTitle;
+                titleTimer.current = setTimeout(() => {
+                    document.title = originalTitle.current;
+                }, 2000);
             }
-        });
-
-        // 监听窗口焦点变化（作为补充）
-        window.addEventListener('blur', setAwayTitle);
-        window.addEventListener('focus', restoreOriginalTitle);
+        };
+        if (web.dynamicTitle) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        } else {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            if (titleTimer.current) clearTimeout(titleTimer.current);
+        }
     }
-
-
     // 每次切换页面滚动到顶部
     useEffect(() => {
         // 尊重开源，禁止删除此版权信息！！！
