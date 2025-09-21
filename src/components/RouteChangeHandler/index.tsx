@@ -4,6 +4,7 @@ import {useEffect} from 'react';
 import {usePathname} from 'next/navigation';
 import {useConfigStore} from '@/stores'
 import {Web} from '@/types/app/config'
+import GrayscaleController from '@/utils/ grayscale-mode'
 
 // 监听路由变化
 const RouteChangeHandler: React.FC = () => {
@@ -11,6 +12,8 @@ const RouteChangeHandler: React.FC = () => {
     const pathname = usePathname();
 
     if (typeof document !== 'undefined') {
+        // 网站变灰
+        new GrayscaleController(web?.grayscaleDates)
         // 保存原始标题
         const originalTitle = document.title;
         const favicon: HTMLLinkElement | null = document.querySelector('link[rel="icon"]');

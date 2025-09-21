@@ -27,10 +27,10 @@ export interface Web {
     dynamicTitle: boolean;
     leaveTitle: string;
     backTitle: string;
+    grayscaleDates: string[];
 
 }
 
-export type ArticleLayout = 'classics' | 'card' | 'waterfall' | ''
 export type RightSidebar = 'author' | 'hotArticle' | 'randomArticle' | 'newComments' | 'runTime' | 'study'
 
 // 主题配置
@@ -55,8 +55,6 @@ export interface Other {
     isHcaptcha: boolean,
 }
 
-
-export type EnvConfigName = 'baidu_statis' | 'email' | 'gaode_map' | 'gaode_coordinate'
 
 export interface Config {
     id: string,
