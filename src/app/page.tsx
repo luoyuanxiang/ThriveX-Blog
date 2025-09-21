@@ -6,7 +6,8 @@ import ArticleLayout from '@/components/ArticleLayout';
 import Sidebar from '@/components/Sidebar';
 
 import {getWebConfigDataAPI} from '@/api/config';
-import {Theme} from '@/types/app/config';
+import {Theme, Web} from '@/types/app/config';
+import Lantern from '@/components/Lantern';
 
 interface Props {
     searchParams: Promise<{ page: number }>;
@@ -16,14 +17,17 @@ export default async (props: Props) => {
     const searchParams = await props.searchParams;
     const page = searchParams.page || 1;
     const {
-        data: {value: data},
+        data: {value: theme},
     } = (await getWebConfigDataAPI<{ value: Theme }>('theme')) || {data: {value: {} as Theme}};
 
+    const {
+        data: {value: web},
+    } = (await getWebConfigDataAPI<{ value: Web }>('web')) || {data: {value: {} as Web}};
     return (
         <>
-            {/* <Lantern data={['新', '春', '快', '乐']} /> */}
+            {web?.lantern && <Lantern data={['新', '春', '快', '乐']}/>}
 
-            <Slide src={data?.swiper_image}>
+            <Slide src={theme?.swiper_image}>
                 {/* 星空背景组件 */}
                 <Starry/>
                 {/* 打字机组件 */}

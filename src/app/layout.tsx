@@ -4,8 +4,6 @@ import HeroUIProvider from '@/components/HeroUIProvider';
 import NProgress from '@/components/NProgress';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import RouteChangeHandler from '@/components/RouteChangeHandler';
 
 import {getWebConfigDataAPI} from '@/api/config';
