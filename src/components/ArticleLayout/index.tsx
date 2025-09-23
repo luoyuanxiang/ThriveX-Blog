@@ -26,7 +26,7 @@ export default async ({page}: { page: number }) => {
             size: theme.is_article_layout === 'waterfall' ? 28 : 8
         }
     })) || {data: {} as Paginate<Article[]>};
-    data.result = data?.result?.filter((item) => item.config.status !== 'no_home');
+    data.result = data?.result?.filter((item) => item.status !== 'no_home');
 
     return (
         <div

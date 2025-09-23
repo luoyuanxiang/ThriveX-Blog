@@ -3,16 +3,6 @@ import {Tag} from './tag'
 
 export type Status = 'show' | 'no_home' | 'hide'
 
-export interface Config {
-    id?: number,
-    articleId?: number,
-    top: number,
-    status: Status,
-    isEncrypt: number,
-    isDel: number,
-    password: string
-}
-
 export interface Article {
     id?: number,
     title: string,
@@ -25,8 +15,12 @@ export interface Article {
     tagList: Tag[]
     view?: number
     comment?: number,
-    config: Config,
     prev: { id: number, title: string },
     next: { id: number, title: string },
     createTime: string,
+    isTop: number,
+    status: Status,
+    isEncrypt: number,
+    isDel: number,
+    password: string
 }

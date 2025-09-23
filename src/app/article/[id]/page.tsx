@@ -49,7 +49,7 @@ export default async (props: Props) => {
     // 图标样式
     const iconSty = 'flex justify-center items-center w-5 h-5 rounded-full text-xs mr-1';
 
-    if ((data && data.config.isEncrypt !== 1) || (password && data.config.isEncrypt === 1)) {
+    if ((data && data.isEncrypt !== 1) || (password && data.isEncrypt === 1)) {
         return (
             <>
                 <title>{data.title}</title>
