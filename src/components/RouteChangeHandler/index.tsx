@@ -1,41 +1,12 @@
 'use client';
 
-import {useEffect, useRef} from 'react';
+import {useEffect} from 'react';
 import {usePathname} from 'next/navigation';
-import {useConfigStore} from '@/stores'
-import {Web} from '@/types/app/config'
-import GrayscaleController from '@/utils/grayscale-mode'
 
 // 监听路由变化
 const RouteChangeHandler: React.FC = () => {
-    const web: Web = useConfigStore((state) => state.web);
     const pathname = usePathname();
-    const titleTimer = useRef<NodeJS.Timeout | null>(null);
-    const originalTitle = useRef<string>('');
 
-    if (typeof document !== 'undefined') {
-        // 网站变灰
-        new GrayscaleController(web?.grayscaleDates);
-        // 保存原始标题
-        originalTitle.current = document.title;
-        const handleVisibilityChange = () => {
-            if (document.hidden) {
-                document.title = web.leaveTitle;
-                if (titleTimer.current) clearTimeout(titleTimer.current);
-            } else {
-                document.title = web.backTitle;
-                titleTimer.current = setTimeout(() => {
-                    document.title = originalTitle.current;
-                }, 2000);
-            }
-        };
-        if (web.dynamicTitle) {
-            document.addEventListener('visibilitychange', handleVisibilityChange);
-        } else {
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-            if (titleTimer.current) clearTimeout(titleTimer.current);
-        }
-    }
     // 每次切换页面滚动到顶部
     useEffect(() => {
         // 尊重开源，禁止删除此版权信息！！！

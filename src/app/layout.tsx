@@ -16,6 +16,8 @@ import BaiduStatis from '@/components/BaiduStatis';
 import FloatingBlock from '@/components/FloatingBlock';
 import InjectData from '@/components/InjectData';
 import { Analytics } from '@vercel/analytics/react'
+import GrayscaleModeHandler from '@/components/Grayscale';
+import DynamicTitleHandler from '@/components/DynamicTitle';
 
 // 加载本地字体
 const LXGWWenKai = localFont({
@@ -55,6 +57,12 @@ export default async function RootLayout({children}: Readonly<{ children: React.
         <InjectData/>
         {/* 🎉 礼花效果 */}
         {/* <Confetti /> */}
+        
+        {/* 网站变灰控制 */}
+        <GrayscaleModeHandler />
+
+        {/* 动态标题控制 */}
+        <DynamicTitleHandler />
 
         {/* 进度条组件 */}
         <NProgress/>
