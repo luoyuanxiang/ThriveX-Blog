@@ -40,8 +40,7 @@ export default async function RootLayout({children}: Readonly<{ children: React.
             <title>{`${data?.title} - ${data?.subhead}`}</title>
             <meta name="description" content={data?.description}/>
             <meta name="keywords" content={data?.keyword}/>
-            <link rel="icon" type="image/x-icon" href={data?.favicon || '/favicon.ico'}/>
-            <link rel="shortcut icon" type="image/x-icon" href={data?.favicon || '/favicon.ico'}/>
+            <link rel="shortcut icon" type="image/x-icon" href="https://cdn.luoyuanxiang.top/%E6%91%86%E7%83%82.png"/>
 
             {/* 百度统计 */}
             <BaiduStatis/>

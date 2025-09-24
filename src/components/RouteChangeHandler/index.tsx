@@ -15,7 +15,7 @@ const RouteChangeHandler: React.FC = () => {
 
     if (typeof document !== 'undefined') {
         // 网站变灰
-        new GrayscaleController();
+        new GrayscaleController(web?.grayscaleDates);
         // 保存原始标题
         originalTitle.current = document.title;
         const handleVisibilityChange = () => {
