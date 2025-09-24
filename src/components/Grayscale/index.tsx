@@ -9,7 +9,11 @@ export default function GrayscaleModeHandler() {
 
     useEffect(() => {
         // 网站变灰
-        new GrayscaleController(web?.grayscaleDates);
+        const gr = new GrayscaleController(web?.grayscaleDates);
+        return () => {
+            // 网站恢复
+            gr.disableGrayscale();
+        };
     }, [web]);
 
     return null;

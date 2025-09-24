@@ -5,15 +5,7 @@ class GrayscaleController {
     private static readonly STYLE_ID = 'grayscale-style';
 
     constructor(customDates?: string[]) {
-        // 合并默认日期和自定义日期，去重处理
-        const defaultDates = [
-            '04-05',   // 清明节
-            '05-12',   // 汶川地震纪念日
-            '09-18',  // 九一八事件
-            '12-13',    // 国家公祭日
-        ];
-
-        this.grayscaleDates = [...new Set([...defaultDates, ...(customDates || [])])];
+        this.grayscaleDates = [...new Set([...(customDates || [])])];
         this.init();
     }
 
@@ -118,15 +110,6 @@ class GrayscaleController {
     public getGrayscaleDates(): string[] {
         return [...this.grayscaleDates]; // 返回副本，防止外部修改
     }
-}
-
-if (typeof document !== 'undefined') {
-    // 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', () => {
-        // 可以传入自定义日期覆盖或补充默认日期
-        // 例如：new GrayscaleController(['2024-01-01', '2024-10-01']);
-        new GrayscaleController();
-    });
 }
 
 // 导出类供其他模块使用（如果需要）
